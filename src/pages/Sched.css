@@ -1,0 +1,121 @@
+.aspenBridge {
+    border: 1px solid #10509b;
+    border-radius: 8px;
+    color: #10509b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.aspen-logo {
+    width: 20px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 300;
+}
+
+.space {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+ol {
+    list-style-position: inside;
+}
+
+
+.schedule,
+.special-schedule {
+    border-collapse: collapse;
+}
+
+.day-edit {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+
+.t-label,
+.t-content {
+    /* border: none; */
+    box-sizing: border-box;
+}
+
+
+tr {
+    border: 1px solid #a8a8a8;
+
+}
+
+td {
+    text-align: center;
+    height: 8vh;
+    border: 1px solid #a8a8a8;
+}
+
+.t-content .t-input {
+    /* text-align: center; */
+    font-size: 1.4rem;
+    resize: none;
+    text-align: center;
+}
+
+.t-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.schedule {
+    width: 100%;
+}
+
+.save {
+    width: 10rem;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--deep-blue);
+    color: #fff;
+    cursor: pointer;
+}
+
+.trash {
+    width: 4%;
+}
+
+th {
+    border: 1px solid #a8a8a8;
+    text-align: left;
+    padding: 10px;
+    width: 32%;
+}
+
+.add, .delete {
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.add:hover, .delete:hover {
+    color: #fff;
+    background-color: #D22030;
+}
