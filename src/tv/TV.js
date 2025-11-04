@@ -174,71 +174,61 @@ const TV = () => {
         }
     }
 
-    const fiveDays = [
-        ["1", "2", "3", "4", "5", "6"],
-        ["CREW", "A", "B", "C", "D", "E"],
-        ["G", "F", "E", "D", "C", "B"],
-        ["A", "B", "C", "F", "G", "FLEX"],
-        ["G", "F", "E", "D", "B", "A"],
-        ["A", "C", "D", "E", "F", "G"],
-        ["1", "2", "3", "4", "5", "6"]
-    ]
-
-    // const [schedule, setSchedule] = useState()
+    const [schedule, setSchedule] = useState()
 
     // TESTING
-    const [schedule, setSchedule] = useState(
-        [
-            {
-                "time": "8:15 AM - 9:17 AM",
-                "block": "A",
-                "meets": "(M,W,R,F)"
-            },
-            {
-                "time": "9:20 AM - 10:17 AM",
-                "block": "C",
-                "meets": "(M,T,W,F)"
-            },
-            {
-                "time": "10:20 AM - 11:17 AM",
-                "block": "D",
-                "meets": "(T,F)"
-            },
-            {
-                "time": "11:19 AM - 12:41 PM",
-                "block": "E",
-                "meets": "(M,T,R,F)"
-            }
-        ]
-    )
+    // const [schedule, setSchedule] = useState(
+    //     [
+    //         {
+    //             "time": "8:15 AM - 9:17 AM",
+    //             "block": "A",
+    //             "meets": "(M,W,R,F)"
+    //         },
+    //         {
+    //             "time": "9:20 AM - 10:17 AM",
+    //             "block": "C",
+    //             "meets": "(M,T,W,F)"
+    //         },
+    //         {
+    //             "time": "10:20 AM - 11:17 AM",
+    //             "block": "D",
+    //             "meets": "(T,F)"
+    //         },
+    //         {
+    //             "time": "11:19 AM - 12:41 PM",
+    //             "block": "E",
+    //             "meets": "(M,T,R,F)"
+    //         }
+    //     ]
+    // )
 
     // Check DB for schedule
-    // useEffect(() => {
-    //     const db = getDatabase(app);
-    //     const scheduleRef = ref(db, "sched");
+    useEffect(() => {
+        const db = getDatabase(app);
+        const scheduleRef = ref(db, "sched");
 
-    //     onValue(scheduleRef, (snapshot) => {
-    //         const data = snapshot.val();
-    //         const dateString = new Date().toLocaleDateString('en-US', {
-    //             timeZone: 'America/New_York',
-    //             year: 'numeric',
-    //             month: '2-digit',
-    //             day: '2-digit'
-    //         });
-    //         if (data) {
-    //             if (data.date === dateString) {
-    //                 console.log("USING DB")
-    //                 setSchedule(data.output)
-    //             } else {
-    //                 console.log("DATES DON'T MATCH, FETCHING")
-    //                 postSchedule()
-    //             }
-    //         } else {
-    //             console.log("NO SCHED DATA IN DB")
-    //             postSchedule()
-    //         }
-    //     });
-    // }, []);
+        onValue(scheduleRef, (snapshot) => {
+            const data = snapshot.val();
+            const dateString = new Date().toLocaleDateString('en-US', {
+                timeZone: 'America/New_York',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            if (data) {
+                if (data.date === dateString) {
+                    console.log("USING DB")
+                    setSchedule(data.output)
+                } else {
+                    console.log("DATES DON'T MATCH, FETCHING")
+                    postSchedule()
+                }
+            } else {
+                console.log("NO SCHED DATA IN DB")
+                postSchedule()
+            }
+        });
+    }, []);
 
     const postSchedule = async () => {
         // set blank for loader
@@ -250,6 +240,11 @@ const TV = () => {
         } catch (err) {
             console.error(err)
         }
+    }
+
+    const isWeekend = () => {
+        const day = new Date().getDay();
+        return day === 0 || day === 6; // 0 = Sunday, 6 = Saturday
     }
 
     return (
@@ -292,7 +287,6 @@ const TV = () => {
                                         </span>
                                     </div>
                                 </div>
-                                {/* need filled icons */}
                                 <div className="weatherDetails">
                                     <div className="weatherAlpha">
                                         <div className="weatherIconText">
@@ -325,11 +319,12 @@ const TV = () => {
                                 ))}
                             </div>
                         ) : (
-                            <div className="load">
-                                <img src="./aspen-logo.png" alt="" className="aspen" />
-                                {/* <div className="loader"></div> */}
-                            </div>
-
+                            !isWeekend() && (
+                                <div className="load">
+                                    <img src="./aspen-logo.png" alt="" className="aspen" />
+                                    <div className="loader"></div>
+                                </div>
+                            )
                         )}
                         <div className="progressOutline">
                             <div className="progress"></div>
