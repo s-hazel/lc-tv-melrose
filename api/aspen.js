@@ -18,7 +18,7 @@ if (!admin.apps.length) {
 export default async function handler(req, res) {
     try {
         // ASPENBRIDGE
-        const url = "https://aspenbridge.onrender.com/schedule"
+        const url = "https://aspenbridge-3dko.onrender.com/schedule"
 
         const response = await fetch(url, {
             headers: {

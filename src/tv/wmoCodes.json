@@ -1,114 +1,142 @@
 {
   "0": {
     "description": "Sunny",
-    "image": "http://openweathermap.org/img/wn/01d@2x.png"
+    "image": "http://openweathermap.org/img/wn/01d@2x.png",
+    "background": "./wmoImages/sunny.jpg"
   },
   "1": {
     "description": "Mainly Sunny",
-    "image": "http://openweathermap.org/img/wn/01d@2x.png"
+    "image": "http://openweathermap.org/img/wn/01d@2x.png",
+    "background": "./wmoImages/mainlySunny.jpg"
   },
   "2": {
     "description": "Partly Cloudy",
-    "image": "http://openweathermap.org/img/wn/02d@2x.png"
+    "image": "http://openweathermap.org/img/wn/02d@2x.png",
+    "background": "./wmoImages/partlyCloudy.jpg"
   },
   "3": {
     "description": "Cloudy",
-    "image": "http://openweathermap.org/img/wn/03d@2x.png"
+    "image": "http://openweathermap.org/img/wn/03d@2x.png",
+    "background": "./wmoImages/cloudy.jpg"
   },
   "45": {
     "description": "Foggy",
-    "image": "http://openweathermap.org/img/wn/50d@2x.png"
+    "image": "http://openweathermap.org/img/wn/50d@2x.png",
+    "background": "./wmoImages/foggy.jpg"
   },
   "48": {
     "description": "Rime Fog",
-    "image": "http://openweathermap.org/img/wn/50d@2x.png"
+    "image": "http://openweathermap.org/img/wn/50d@2x.png",
+    "background": "./wmoImages/rimeFog.jpg"
   },
   "51": {
     "description": "Light Drizzle",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/lightDrizzle.jpg"
   },
   "53": {
     "description": "Drizzle",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/drizzle.jpg"
   },
   "55": {
     "description": "Heavy Drizzle",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/heavyDrizzle.jpg"
   },
   "56": {
     "description": "Light Freezing Drizzle",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/freezingDrizzle.jpg"
   },
   "57": {
     "description": "Freezing Drizzle",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/freezingDrizzle.jpg"
   },
   "61": {
     "description": "Light Rain",
-    "image": "http://openweathermap.org/img/wn/10d@2x.png"
+    "image": "http://openweathermap.org/img/wn/10d@2x.png",
+    "background": "./wmoImages/lightRain.jpg"
   },
   "63": {
     "description": "Rain",
-    "image": "http://openweathermap.org/img/wn/10d@2x.png"
+    "image": "http://openweathermap.org/img/wn/10d@2x.png",
+    "background": "./wmoImages/rain.jpg"
   },
   "65": {
     "description": "Heavy Rain",
-    "image": "http://openweathermap.org/img/wn/10d@2x.png"
+    "image": "http://openweathermap.org/img/wn/10d@2x.png",
+    "background": "./wmoImages/heavyRain.jpg"
   },
   "66": {
     "description": "Light Freezing Rain",
-    "image": "http://openweathermap.org/img/wn/10d@2x.png"
+    "image": "http://openweathermap.org/img/wn/10d@2x.png",
+    "background": "./wmoImages/freezingRain.jpg"
   },
   "67": {
     "description": "Freezing Rain",
-    "image": "http://openweathermap.org/img/wn/10d@2x.png"
+    "image": "http://openweathermap.org/img/wn/10d@2x.png",
+    "background": "./wmoImages/freezingRain.jpg"
   },
   "71": {
     "description": "Light Snow",
-    "image": "http://openweathermap.org/img/wn/13d@2x.png"
+    "image": "http://openweathermap.org/img/wn/13d@2x.png",
+    "background": "./wmoImages/lightSnow.jpg"
   },
   "73": {
     "description": "Snow",
-    "image": "http://openweathermap.org/img/wn/13d@2x.png"
+    "image": "http://openweathermap.org/img/wn/13d@2x.png",
+    "background": "./wmoImages/snow.jpg"
   },
   "75": {
     "description": "Heavy Snow",
-    "image": "http://openweathermap.org/img/wn/13d@2x.png"
+    "image": "http://openweathermap.org/img/wn/13d@2x.png",
+    "background": "./wmoImages/heavySnow.jpg"
   },
   "77": {
     "description": "Snow Grains",
-    "image": "http://openweathermap.org/img/wn/13d@2x.png"
+    "image": "http://openweathermap.org/img/wn/13d@2x.png",
+    "background": "./wmoImages/snowGrains.jpg"
   },
   "80": {
     "description": "Light Showers",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/showers.jpg"
   },
   "81": {
     "description": "Showers",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/showers.jpg"
   },
   "82": {
     "description": "Heavy Showers",
-    "image": "http://openweathermap.org/img/wn/09d@2x.png"
+    "image": "http://openweathermap.org/img/wn/09d@2x.png",
+    "background": "./wmoImages/showers.jpg"
   },
   "85": {
     "description": "Light Snow Showers",
-    "image": "http://openweathermap.org/img/wn/13d@2x.png"
+    "image": "http://openweathermap.org/img/wn/13d@2x.png",
+    "background": "./wmoImages/snowShowers.jpg"
   },
   "86": {
     "description": "Snow Showers",
-    "image": "http://openweathermap.org/img/wn/13d@2x.png"
+    "image": "http://openweathermap.org/img/wn/13d@2x.png",
+    "background": "./wmoImages/snowShowers.jpg"
   },
   "95": {
     "description": "Thunderstorm",
-    "image": "http://openweathermap.org/img/wn/11d@2x.png"
+    "image": "http://openweathermap.org/img/wn/11d@2x.png",
+    "background": "./wmoImages/thunderstorm.jpg"
   },
   "96": {
     "description": "Light Thunderstorms With Hail",
-    "image": "http://openweathermap.org/img/wn/11d@2x.png"
+    "image": "http://openweathermap.org/img/wn/11d@2x.png",
+    "background": "./wmoImages/hail.jpg"
   },
   "99": {
     "description": "Thunderstorm With Hail",
-    "image": "http://openweathermap.org/img/wn/11d@2x.png"
+    "image": "http://openweathermap.org/img/wn/11d@2x.png",
+    "background": "./wmoImages/thunderHail.jpg"
   }
 }

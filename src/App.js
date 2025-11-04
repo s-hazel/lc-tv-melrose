@@ -21,7 +21,6 @@ function App() {
               <Route element={<Dashboard />} path="/dashboard" />
               <Route element={<Sched />} path="/schedule" />
               <Route element={<Resources />} path="/resources" />
-              {/* <Route element={<Create />} path="/create" /> */}
             </Route>
           </Route>
           <Route element={<TV />} path="/tv"></Route>

@@ -7,7 +7,7 @@ const Resources = () => {
             <hr />
             <div className="space">
                 <h2>AspenBridge Student Credentials</h2>
-                <p>The schedule component depends upon a student with a working schedule. AspenBridge logs into their account once a day and stores the current schedule in a database.</p>
+                <p>The schedule depends on a student with a working Aspen schedule. AspenBridge logs into their account once a day and stores the current schedule in a database.</p>
                 <ol>
                     <li>Log on to <a href="https://www.render.com" target="_blank">render.com</a> using the melroseSTL info.</li>
                     <li>Click on "AspenBridge" in the "aspen" project.</li>
@@ -18,7 +18,6 @@ const Resources = () => {
                 </ol>
 
                 <p>Built by Sam Haseltine '27.</p>
-
             </div>
         </>
     )

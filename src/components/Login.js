@@ -98,7 +98,7 @@ function Login() {
                 <div className="left">
                     <form onSubmit={authEmail} className="traditional" noValidate>
                         <img src="1421c84b-93b0-404c-9efa-7c43108b279f.png" alt="" className='logo' />
-                        <p className="app-name">MHS Hack Club TVs</p>
+                        <p className="app-name">Melrose LC TV</p>
                         <p className="tagline">Sign In</p>
                         <div className="hr"></div>
 

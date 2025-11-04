@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 * {
     box-sizing: border-box;
+    font-family: Roboto;
 }
 
 :root {
@@ -90,27 +93,63 @@
 .percent {
     font-size: 1.2rem;
     font-weight: 500;
+    margin-bottom: 5px;
 }
 
-.weatherImage {
-    width: 100%;
-    height: 100%;
-    /* height: 100%; */
-    object-fit: cover;
-    object-position: center;
-    filter: brightness(72%);
-}
+
 
 .weather {
     position: relative;
     width: 100%;
     height: 150px;
-    opacity: 0.5;
     border-radius: 10px;
     overflow: clip;
     color: #fff;
-    font-weight: bold;
     flex: 1;
+}
+
+.hiLo {
+    display: flex;
+    gap: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px 5px 5px;
+    border-radius: 20px;
+    width: fit-content;
+    color: #dbdbdb;
+}
+
+.hiLo span {
+    display: flex;
+    align-items: center;
+}
+
+.spaceBetween {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.weatherDetails {
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+}
+
+.weatherAlpha {
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #dbdbdb;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.weatherIconText {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    /* text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25); */
 }
 
 .weatherData {
@@ -122,11 +161,20 @@
     padding: 15px;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.0);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+}
+
+.weatherImage {
+    width: 100%;
+    height: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+    object-position: center;
 }
 
 .temp {
     font-size: 3.5rem;
+    font-weight: 500;
 }
 
 .degrees {
@@ -183,13 +231,13 @@
 
 .schedule {
     width: 100%;
-    max-height: 30vh;
 }
 
 .blocks {
     display: flex;
     gap: 10px;
     margin-bottom: 12px;
+    max-height: 30vh;
 }
 
 .block {
@@ -201,7 +249,7 @@
     border-radius: 10px;
     background-color: hsla(0, 0%, 16%, 1);
     color: #fff;
-    font-size: 3rem;
+    font-size: 3.5rem;
     position: relative;
     word-break: break-all;
 }
@@ -322,8 +370,8 @@
     height: 20vh;
     position: relative;
     margin-bottom: 12px;
-        border: 1px solid hsla(0, 0%, 84%, 1);
-border-radius: 10px;
+    border: 1px solid hsla(0, 0%, 84%, 1);
+    border-radius: 10px;
     /* border: 1px solid #000; */
 }
 

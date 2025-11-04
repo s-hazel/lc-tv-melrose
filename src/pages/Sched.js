@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Sched.css";
-import { getDatabase, ref, onValue, update } from "firebase/database";
+import { getDatabase, ref, onValue, update, remove } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../fb/fbConfig.js";
 
@@ -33,6 +33,9 @@ const Sched = () => {
 
     const postSchedule = async () => {
         try {
+            const db = getDatabase(app);
+            const schedRef = ref(db, "sched")
+            remove(schedRef);
             const res = await fetch("/api/aspen")
             const data = await res.json()
         } catch (err) {
@@ -45,8 +48,6 @@ const Sched = () => {
             i === index ? { ...block, [field]: value } : block
         ));
     };
-
-
 
     const saveSchedule = () => {
         const db = getDatabase(app);
@@ -73,9 +74,9 @@ const Sched = () => {
         <>
             <h1>Schedule</h1>
             <hr />
-            <div className="space">
-                <h2><span className="material-symbols-rounded">refresh</span>Refresh</h2>
-                <div className="content">
+            <div className="content">
+                <div className="refresh">
+                    <h2><span className="material-symbols-rounded">refresh</span>Refresh</h2>
                     <button className="aspenBridge" onClick={postSchedule}>
                         <img src="./aspen-logo.png" alt="" className="aspen-logo" />
                         <p>
@@ -83,79 +84,65 @@ const Sched = () => {
                         </p>
                     </button>
                 </div>
-                <h2><span className="material-symbols-rounded">edit</span> Edit</h2>
 
-                {sched && (
-                    <div className="day-edit">
-                        <table className="special-schedule">
-                            <tbody className="special-body">
-                                <tr>
-                                    <th className="trash"></th>
-                                    <th>Block</th>
-                                    <th>Time</th>
-                                    <th>Meets</th>
-                                </tr>
-                                {sched.map((block, index) => (
-                                    <tr key={`row-${index}`} className="special-row">
-                                        <td className="delete" onClick={() => deleteRow(index)}>
-                                            <span className="material-symbols-rounded">delete</span>
-                                        </td>
-                                        <td className="t-content">
-                                            <input
-                                                type="text"
-                                                value={block.block}
-                                                onChange={(e) => updateField(index, 'block', e.target.value)}
-                                                className="t-input"
-                                            />
-                                        </td>
-                                        <td className="t-label">
-                                            <input
-                                                type="text"
-                                                value={block.time}
-                                                onChange={(e) => updateField(index, 'time', e.target.value)}
-                                                className="t-input"
-                                            />
-                                        </td>
-                                        <td className="t-label">
-                                            <input
-                                                type="text"
-                                                value={block.meets}
-                                                onChange={(e) => updateField(index, 'meets', e.target.value)}
-                                                className="t-input"
-                                            />
+                <div className="edit">
+                    <h2><span className="material-symbols-rounded">edit</span> Edit</h2>
+
+                    {sched && (
+                        <div className="day-edit">
+                            <table className="special-schedule">
+                                <tbody className="special-body">
+                                    <tr>
+                                        <th className="trash"></th>
+                                        <th>Block</th>
+                                        <th>Time</th>
+                                        <th>Meets</th>
+                                    </tr>
+                                    {sched.map((block, index) => (
+                                        <tr key={`row-${index}`} className="special-row">
+                                            <td className="delete" onClick={() => deleteRow(index)}>
+                                                <span className="material-symbols-rounded">delete</span>
+                                            </td>
+                                            <td className="t-content">
+                                                <input
+                                                    type="text"
+                                                    value={block.block}
+                                                    onChange={(e) => updateField(index, 'block', e.target.value)}
+                                                    className="t-input"
+                                                />
+                                            </td>
+                                            <td className="t-label">
+                                                <input
+                                                    type="text"
+                                                    value={block.time}
+                                                    onChange={(e) => updateField(index, 'time', e.target.value)}
+                                                    className="t-input"
+                                                />
+                                            </td>
+                                            <td className="t-label">
+                                                <input
+                                                    type="text"
+                                                    value={block.meets}
+                                                    onChange={(e) => updateField(index, 'meets', e.target.value)}
+                                                    className="t-input"
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    <tr>
+                                        <td colSpan={4} className="add" onClick={addRow}>
+                                            <span className="material-symbols-rounded">add</span>
                                         </td>
                                     </tr>
-                                ))}
-                                <tr>
-                                    <td colSpan={4} className="add" onClick={addRow}>
-                                        <span className="material-symbols-rounded">add</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button className="save" onClick={saveSchedule}>Save</button>
-                    </div>
-                )}
-
+                                </tbody>
+                            </table>
+                            <button className="save" onClick={saveSchedule}>Save</button>
+                        </div>
+                    )}
+                </div>
             </div>
         </>
     )
 }
-
-// {
-//     schedule ? (
-//         <div className="blocks">
-//             {schedule.map(block => (
-//                 <Block key={block.block} meets={block.meets} letter={block.block} time={block.time} />
-//             ))}
-//         </div>
-//     ) : (
-//         <div className="load">
-//             <img src="./aspen-logo.png" alt="" className="aspen" />
-//             <div className="loader"></div>
-//         </div>
-
-//     )
-// }
 
 export default Sched

@@ -27,27 +27,31 @@ const TV = () => {
     const [weatherHi, setWeatherHi] = useState(0)
     const [weatherLo, setWeatherLo] = useState(0)
     const [weatherDesc, setWeatherDesc] = useState("")
+    const [weatherRain, setWeatherRain] = useState("0")
+    const [weatherWind, setWeatherWind] = useState("0")
+    const [wmoBkgrd, setWeatherBkgrd] = useState(wmo["0"].background)
 
     const [menuToday, setMenuToday] = useState(["./no-lunch.jpg", "No lunch today"])
 
     const [announcements, setAnnouncements] = useState({ data: [] })
 
     useEffect(() => {
-        const weather = async () => {
+        const fetchWeather = async () => {
             try {
-                const weather_url = "https://api.open-meteo.com/v1/forecast?latitude=42.4584&longitude=-71.0662&daily=temperature_2m_max,temperature_2m_min,weather_code&current=temperature_2m&timezone=America%2FNew_York&forecast_days=1&temperature_unit=fahrenheit"
+                const weather_url = "https://api.open-meteo.com/v1/forecast?latitude=42.4584&longitude=-71.0662&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,precipitation_probability_max&current=temperature_2m&timezone=America%2FNew_York&forecast_days=1&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch"
                 const res = await fetch(weather_url)
                 const weatherData = await res.json()
                 setWeatherTemp(Math.round(weatherData["current"]["temperature_2m"]))
                 setWeatherHi(Math.round(weatherData["daily"]["temperature_2m_max"][0]))
                 setWeatherLo(Math.round(weatherData["daily"]["temperature_2m_min"][0]))
                 setWeatherDesc(wmo[weatherData["daily"]["weather_code"][0]].description)
+                setWeatherBkgrd(wmo[weatherData["daily"]["weather_code"][0]].background)
+                setWeatherRain(weatherData["daily"]["precipitation_probability_max"])
+                setWeatherWind(weatherData["daily"]["wind_speed_10m_max"][0])
             } catch (err) {
                 console.log(err)
             }
         }
-
-        weather()
 
         const fetchLunch = async () => {
             try {
@@ -88,8 +92,6 @@ const TV = () => {
             }
         }
 
-        fetchLunch()
-
         const fetchAnn = async () => {
             try {
                 const res = await fetch("/api/announcements")
@@ -100,7 +102,9 @@ const TV = () => {
             }
         }
 
-        fetchAnn()
+        fetchWeather()
+        // fetchLunch()
+        // fetchAnn()
     }, [])
 
     const [currentAnn, setCurrentAnn] = useState(0)
@@ -180,71 +184,61 @@ const TV = () => {
         ["1", "2", "3", "4", "5", "6"]
     ]
 
-    const [schedule, setSchedule] = useState()
+    // const [schedule, setSchedule] = useState()
 
     // TESTING
-    // const [schedule, setSchedule] = useState({
-    //     "schedule": [
-    //         {
-    //             "time": "8:15 AM - 9:17 AM",
-    //             "block": "A",
-    //             "meets": "(M,W,R,F)"
-    //         },
-    //         {
-    //             "time": "9:20 AM - 10:17 AM",
-    //             "block": "C",
-    //             "meets": "(M,T,W,F)"
-    //         },
-    //         {
-    //             "time": "10:20 AM - 11:17 AM",
-    //             "block": "D",
-    //             "meets": "(T,F)"
-    //         },
-    //         {
-    //             "time": "11:19 AM - 12:41 PM",
-    //             "block": "E",
-    //             "meets": "(M,T,R,F)"
-    //         },
-    //         {
-    //             "time": "12:44 PM - 1:41 PM",
-    //             "block": "F",
-    //             "meets": "(T,W,R,F)"
-    //         },
-    //         {
-    //             "time": "1:44 PM - 2:41 PM",
-    //             "block": "G",
-    //             "meets": "(T,W,R,F)"
-    //         }
-    //     ]
-    // })
+    const [schedule, setSchedule] = useState(
+        [
+            {
+                "time": "8:15 AM - 9:17 AM",
+                "block": "A",
+                "meets": "(M,W,R,F)"
+            },
+            {
+                "time": "9:20 AM - 10:17 AM",
+                "block": "C",
+                "meets": "(M,T,W,F)"
+            },
+            {
+                "time": "10:20 AM - 11:17 AM",
+                "block": "D",
+                "meets": "(T,F)"
+            },
+            {
+                "time": "11:19 AM - 12:41 PM",
+                "block": "E",
+                "meets": "(M,T,R,F)"
+            }
+        ]
+    )
 
     // Check DB for schedule
-    useEffect(() => {
-        const db = getDatabase(app);
-        const scheduleRef = ref(db, "sched");
+    // useEffect(() => {
+    //     const db = getDatabase(app);
+    //     const scheduleRef = ref(db, "sched");
 
-        onValue(scheduleRef, (snapshot) => {
-            const data = snapshot.val();
-            const dateString = new Date().toLocaleDateString('en-US', {
-                timeZone: 'America/New_York',
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit'
-            });
-            if (data) {
-                if (data.date === dateString) {
-                    console.log("USING DB")
-                    setSchedule(data.output)
-                } else {
-                    console.log("DATES DON'T MATCH, FETCHING")
-                    postSchedule()
-                }
-            } else {
-                console.log("NO SCHED DATA IN DB")
-                postSchedule()
-            }
-        });
-    }, []);
+    //     onValue(scheduleRef, (snapshot) => {
+    //         const data = snapshot.val();
+    //         const dateString = new Date().toLocaleDateString('en-US', {
+    //             timeZone: 'America/New_York',
+    //             year: 'numeric',
+    //             month: '2-digit',
+    //             day: '2-digit'
+    //         });
+    //         if (data) {
+    //             if (data.date === dateString) {
+    //                 console.log("USING DB")
+    //                 setSchedule(data.output)
+    //             } else {
+    //                 console.log("DATES DON'T MATCH, FETCHING")
+    //                 postSchedule()
+    //             }
+    //         } else {
+    //             console.log("NO SCHED DATA IN DB")
+    //             postSchedule()
+    //         }
+    //     });
+    // }, []);
 
     const postSchedule = async () => {
         // set blank for loader
@@ -281,18 +275,36 @@ const TV = () => {
                         </div>
                     </div>
                     <div className="weather">
-                        {/* <img src="https://cdn.pixabay.com/photo/2017/12/28/17/41/summer-3045780_1280.jpg" alt="" className="weatherImage" /> */}
-                        {/* <img src="https://cdn.pixabay.com/photo/2021/05/10/14/48/rain-6243559_1280.jpg" alt="" className="weatherImage" /> */}
-                        <img src="https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1740" alt="" className="weatherImage" />
-
+                        <img src={wmoBkgrd} alt="" className="weatherImage" />
                         <div className="weatherData">
                             <div className="mainWeather">
                                 <p className="temp">{weatherTemp}<span className="degrees"> °F</span></p>
-
-                                <p className="weatherDesc">{weatherDesc}</p>
+                                <p>{weatherDesc}</p>
                             </div>
-                            <div className="extraWeather">
-                                <p className="precipitation">Hi {weatherHi} / Lo {weatherLo}</p>
+                            <div className="spaceBetween">
+                                <div className="extraWeather">
+                                    <div className="hiLo">
+                                        <span>
+                                            <span className="hi material-symbols-rounded">arrow_upward</span> {weatherHi}°
+                                        </span>
+                                        <span>
+                                            <span className="lo material-symbols-rounded">arrow_downward</span> {weatherLo}°
+                                        </span>
+                                    </div>
+                                </div>
+                                {/* need filled icons */}
+                                <div className="weatherDetails">
+                                    <div className="weatherAlpha">
+                                        <div className="weatherIconText">
+                                            <span className="material-symbols-rounded">rainy</span>
+                                            <p>{weatherRain}%</p>
+                                        </div>
+                                        <div className="weatherIconText">
+                                            <span className="material-symbols-rounded">air</span>
+                                            <p>{weatherWind} mph</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -315,7 +327,7 @@ const TV = () => {
                         ) : (
                             <div className="load">
                                 <img src="./aspen-logo.png" alt="" className="aspen" />
-                                <div className="loader"></div>
+                                {/* <div className="loader"></div> */}
                             </div>
 
                         )}
