@@ -103,8 +103,8 @@ const TV = () => {
         }
 
         fetchWeather()
-        // fetchLunch()
-        // fetchAnn()
+        fetchLunch()
+        fetchAnn()
     }, [])
 
     const [currentAnn, setCurrentAnn] = useState(0)
