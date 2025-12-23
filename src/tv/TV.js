@@ -125,6 +125,31 @@ const TV = () => {
         }
     }, [announcements?.data.length])
 
+    // Time Remaining, Progress
+
+    var schoolStart = [8, 15]
+    var schoolEnd = [14, 41]
+
+    const timeParser = () => {
+        const convertTime = (string) => {
+            const [time, period] = string.split(' ');
+            let [hours, minutes] = time.split(':').map(Number);
+
+            if (period === 'PM' && hours !== 12) {
+                hours += 12;
+            } else if (period === 'AM' && hours === 12) {
+                hours = 0;
+            }
+
+            return [hours, minutes]
+        }
+
+        var startTimeStr = schedule[0].time.split('-')[0].trim();
+        schoolStart = convertTime(startTimeStr)
+
+        var endTimeStr = schedule[schedule.length - 1].time.split('-')[1].trim();
+        schoolEnd = convertTime(endTimeStr)
+    }
 
     const [percentComplete, setPercentComplete] = useState("0%")
 
@@ -136,7 +161,7 @@ const TV = () => {
 
         // Set the start and end times
         let startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 15)
-        let endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 41)
+        let endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), schoolEnd[0], schoolEnd(1))
 
         if (now >= startTime && now <= endTime) {
             let duration = endTime - startTime
@@ -161,7 +186,7 @@ const TV = () => {
     const setTimeRemaining = () => {
         let now = new Date()
 
-        let time1441 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 14, 41)
+        let time1441 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), schoolEnd[0], schoolEnd[1])
 
         let difference = time1441 - now
 
@@ -219,6 +244,7 @@ const TV = () => {
                 if (data.date === dateString) {
                     console.log("USING DB")
                     setSchedule(data.output)
+                    timeParser()
                 } else {
                     console.log("DATES DON'T MATCH, FETCHING")
                     postSchedule()
@@ -237,6 +263,7 @@ const TV = () => {
             const res = await fetch("/api/aspen")
             const data = await res.json()
             setSchedule(data.schedule)
+            timeParser()
         } catch (err) {
             console.error(err)
         }
