@@ -127,8 +127,8 @@ const TV = () => {
 
     // Time Remaining, Progress
 
-    var schoolStart = [8, 15]
-    var schoolEnd = [14, 41]
+    const [schoolStart, setSchoolStart] = useState([8, 15])
+    const [schoolEnd, setSchoolEnd] = useState([14, 41])
 
     const timeParser = () => {
         const convertTime = (string) => {
@@ -145,10 +145,10 @@ const TV = () => {
         }
 
         var startTimeStr = schedule[0].time.split('-')[0].trim();
-        schoolStart = convertTime(startTimeStr)
+        setSchoolStart(convertTime(startTimeStr))
 
         var endTimeStr = schedule[schedule.length - 1].time.split('-')[1].trim();
-        schoolEnd = convertTime(endTimeStr)
+        setSchoolEnd(convertTime(endTimeStr))
     }
 
     const [percentComplete, setPercentComplete] = useState("0%")
@@ -201,6 +201,12 @@ const TV = () => {
 
     const [schedule, setSchedule] = useState()
 
+    useEffect(() => {
+        if (schedule && schedule.length > 0) {
+            timeParser();
+        }
+    }, [schedule]);
+
     // TESTING
     // const [schedule, setSchedule] = useState(
     //     [
@@ -244,7 +250,6 @@ const TV = () => {
                 if (data.date === dateString) {
                     console.log("USING DB")
                     setSchedule(data.output)
-                    timeParser()
                 } else {
                     console.log("DATES DON'T MATCH, FETCHING")
                     postSchedule()
@@ -263,7 +268,6 @@ const TV = () => {
             const res = await fetch("/api/aspen")
             const data = await res.json()
             setSchedule(data.schedule)
-            timeParser()
         } catch (err) {
             console.error(err)
         }
