@@ -160,8 +160,8 @@ const TV = () => {
         let now = new Date()
 
         // Set the start and end times
-        let startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 15)
-        let endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), schoolEnd[0], schoolEnd(1))
+        let startTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), schoolStart[0], schoolStart[1])
+        let endTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), schoolEnd[0], schoolEnd[1])
 
         if (now >= startTime && now <= endTime) {
             let duration = endTime - startTime
