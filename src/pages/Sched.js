@@ -52,9 +52,19 @@ const Sched = () => {
     const saveSchedule = () => {
         const db = getDatabase(app);
         const scheduleRef = ref(db, "sched");
+
+        const date = new Date()
+        const dateString = new Date().toLocaleDateString('en-US', {
+            timeZone: 'America/New_York',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+
         update(scheduleRef, {
             user: email,
-            output: sched
+            output: sched,
+            date: dateString
         });
     }
 
