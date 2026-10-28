@@ -77,8 +77,8 @@ const TV = () => {
                 for (const item of today) {
                     if (item["position"] === 1) {
                         // Empty image URLs
-                        if (item["food"]["image_url"] === "") {
-                            setMenuToday(["./not-available.jpg", item["food"]["name"]])
+                        if (item["food"]["image_url"] === "" || item["food"]["image_url"] === null) {
+                            setMenuToday(["./no-lunch.jpg", item["food"]["name"]])
                         } else {
                             setMenuToday([item["food"]["image_url"], item["food"]["name"]])
                         }
